@@ -1,0 +1,373 @@
+#:import rgba kivy.utils.get_color_from_hex
+#:import dp kivy.metrics.dp
+
+# =========================================================
+# GLOBAL BUTTON STYLE (REUSABLE)
+# =========================================================
+<PrimaryButton@MDButton>:
+    md_bg_color: rgba("#4CAF50")
+    size_hint_x: 1
+    radius: [15, 15, 15, 15]
+
+    MDButtonText:
+        color: 1, 1, 1, 1
+        font_style: "Label"
+
+
+# =========================================================
+# LOGIN SCREEN
+# =========================================================
+<LoginScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "../assets/0db150166098c8e1bb1392a6904e63e3.jpg"
+        Color:
+            rgba: 0, 0, 0, 0.3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(30)
+        spacing: dp(20)
+
+        MDCard:
+            size_hint_y: None
+            height: dp(200)
+            md_bg_color: rgba("#2E2E2E")
+            radius: [25, 25, 25, 25]
+            padding: dp(20)
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(10)
+
+                Image:
+                    source: "logo.png"
+                    size_hint: None, None
+                    size: 80, 80
+                    pos_hint: {"center_x": 0.5}
+
+                MDLabel:
+                    text: "CoffeeGuard"
+                    halign: "center"
+                    color: 1, 1, 1, 1
+                    bold: True
+                    size_hint_y: None
+                    height: dp(50)
+
+                MDLabel:
+                    text: "Disease Detection System"
+                    halign: "center"
+                    color: 0.7, 0.7, 0.7, 1
+                    size_hint_y: None
+                    height: dp(40)
+
+        MDCard:
+            size_hint_y: None
+            height: dp(320)
+            md_bg_color: rgba("#2E2E2E")
+            radius: [25, 25, 25, 25]
+            padding: dp(25)
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(15)
+
+                MDLabel:
+                    text: "Welcome Back"
+                    halign: "center"
+                    color: 1, 1, 1, 1
+                    bold: True
+                    size_hint_y: None
+                    height: dp(50)
+
+                MDTextField:
+                    id: email
+                    hint_text: "Email Address"
+                    mode: "outlined"
+
+                MDTextField:
+                    id: password
+                    hint_text: "Password"
+                    password: True
+                    mode: "outlined"
+
+                PrimaryButton:
+                    on_press: root.login_user()
+                    MDButtonText:
+                        text: "Sign In"
+
+                MDButton:
+                    on_press: app.root.current = "recovery"
+                    MDButtonText:
+                        text: "Forgot Your Password?"
+                        color: 1, 1, 1, 1
+
+        MDButton:
+            on_press: app.root.current = "register"
+            MDButtonText:
+                text: "New User? Create Account"
+                color: 1, 1, 1, 1
+
+
+# =========================================================
+# REGISTER SCREEN
+# =========================================================
+<RegisterScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "../assets/28578856a4e17c3f5b78b4988aee55c5.jpg"
+        Color:
+            rgba: 0, 0, 0, 0.4
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(0)
+        spacing: dp(0)
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(50)
+            padding: dp(10)
+            spacing: dp(10)
+            md_bg_color: rgba("#4CAF50")
+
+            MDIconButton:
+                icon: "arrow-left"
+                icon_size: "28sp"
+                on_release: root.go_back()
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(30)
+            spacing: dp(20)
+
+            MDCard:
+                size_hint_y: None
+                height: dp(120)
+                md_bg_color: rgba("#2E2E2E")
+                radius: [25, 25, 25, 25]
+                padding: dp(20)
+
+                MDLabel:
+                    text: "Join CoffeeGuard"
+                    halign: "center"
+                    color: 1, 1, 1, 1
+                    bold: True
+                    font_size: "18sp"
+
+            MDCard:
+                size_hint_y: None
+                height: dp(450)
+                md_bg_color: rgba("#2E2E2E")
+                radius: [25, 25, 25, 25]
+                padding: dp(25)
+
+                ScrollView:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: dp(15)
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDTextField:
+                            hint_text: "First Name"
+                            mode: "outlined"
+
+                        MDTextField:
+                            hint_text: "Last Name"
+                            mode: "outlined"
+
+                        MDTextField:
+                            hint_text: "Email Address"
+                            mode: "outlined"
+
+                        MDTextField:
+                            hint_text: "Password"
+                            password: True
+                            mode: "outlined"
+
+                        MDTextField:
+                            hint_text: "Confirm Password"
+                            password: True
+                            mode: "outlined"
+
+                        PrimaryButton:
+                            on_press: root.register_user()
+                            MDButtonText:
+                                text: "Create Account"
+
+            MDButton:
+                on_press: app.root.current = "login"
+                MDButtonText:
+                    text: "Already have an account? Login here"
+                    color: 1, 1, 1, 1
+
+
+# =========================================================
+# RECOVERY SCREEN
+# =========================================================
+<RecoveryScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "../assets/3b9caf909e6baf2dfd82602471c710ae.jpg"
+        Color:
+            rgba: 0, 0, 0, 0.3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(0)
+        spacing: dp(0)
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(50)
+            padding: dp(10)
+            spacing: dp(10)
+            md_bg_color: rgba("#4CAF50")
+
+            MDIconButton:
+                icon: "arrow-left"
+                icon_size: "28sp"
+                on_release: root.go_back()
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(30)
+            spacing: dp(20)
+
+            MDCard:
+                size_hint_y: None
+                height: dp(250)
+                md_bg_color: rgba("#2E2E2E")
+                radius: [25, 25, 25, 25]
+                padding: dp(25)
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: dp(15)
+
+                    MDTextField:
+                        hint_text: "Registered Email Address"
+                        mode: "outlined"
+
+                    MDTextField:
+                        hint_text: "New Password"
+                        password: True
+                        mode: "outlined"
+
+                    MDButton:
+                        md_bg_color: rgba("#FF9800")
+                        on_press: root.reset_password()
+                        MDButtonText:
+                            text: "Reset Password"
+                            color: 1, 1, 1, 1
+
+            MDButton:
+                on_press: app.root.current = "login"
+                MDButtonText:
+                    text: "Back to Login"
+                    color: 1, 1, 1, 1
+
+
+# =========================================================
+# DASHBOARD SCREEN
+# =========================================================
+<DashboardScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "../assets/0db150166098c8e1bb1392a6904e63e3.jpg"
+        Color:
+            rgba: 0, 0, 0, 0.3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(30)
+        spacing: dp(20)
+
+        MDLabel:
+            text: "Coffee Disease Detection Dashboard"
+            halign: "center"
+            font_style: "Title"
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: dp(50)
+
+        MDCard:
+            size_hint_y: None
+            height: dp(400)
+            md_bg_color: rgba("#2E2E2E")
+            radius: [25, 25, 25, 25]
+            padding: dp(20)
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(15)
+
+                MDButton:
+                    md_bg_color: rgba("#4CAF50")
+                    on_press: root.go_to_detection()
+                    MDButtonText:
+                        text: "Disease Detection"
+                        color: 1, 1, 1, 1
+
+                MDButton:
+                    md_bg_color: rgba("#2196F3")
+                    on_press: root.go_to_history()
+                    MDButtonText:
+                        text: "Scan History"
+                        color: 1, 1, 1, 1
+
+                MDButton:
+                    md_bg_color: rgba("#FF9800")
+                    on_press: root.go_to_selling()
+                    MDButtonText:
+                        text: "Selling"
+                        color: 1, 1, 1, 1
+
+                MDButton:
+                    md_bg_color: rgba("#9C27B0")
+                    on_press: root.go_to_profile()
+                    MDButtonText:
+                        text: "Profile"
+                        color: 1, 1, 1, 1
+
+                MDButton:
+                    md_bg_color: rgba("#607D8B")
+                    on_press: root.go_to_statistics()
+                    MDButtonText:
+                        text: "Statistics"
+                        color: 1, 1, 1, 1
+
+                MDButton:
+                    md_bg_color: rgba("#795548")
+                    on_press: root.go_to_weather()
+                    MDButtonText:
+                        text: "Weather"
+                        color: 1, 1, 1, 1
+
+        MDButton:
+            md_bg_color: rgba("#F44336")
+            on_press: root.logout()
+            MDButtonText:
+                text: "Logout"
+                color: 1, 1, 1, 1

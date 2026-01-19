@@ -1,0 +1,163 @@
+<ProfileScreen>:
+    name: "profile"
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "../assets/0db150166098c8e1bb1392a6904e63e3.jpg"
+        Color:
+            rgba: 0, 0, 0, 0.3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(0)
+        spacing: dp(0)
+
+        # ============================
+        #   TOP BAR WITH BACK BUTTON
+        # ============================
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(50)
+            padding: dp(10)
+            spacing: dp(10)
+            md_bg_color: rgba("#4CAF50")
+
+            MDIconButton:
+                icon: "arrow-left"
+                icon_size: "28sp"
+                on_release: root.go_back()
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(12)
+                spacing: dp(16)
+                size_hint_y: None
+                height: self.minimum_height
+
+                # ============================
+                #   USER INFO CARD
+                # ============================
+                MDCard:
+                    size_hint_y: None
+                    height: dp(220)
+                    md_bg_color: rgba("#FFFFFF")
+                    radius: [25, 25, 25, 25]
+                    elevation: 8
+                    padding: dp(20)
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: dp(12)
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDLabel:
+                            text: "Account Information"
+                            halign: "center"
+                            color: rgba("#4CAF50")
+                            size_hint_y: None
+                            height: dp(55)
+
+                        MDLabel:
+                            id: name_label
+                            text: "Name: Unknown"
+                            halign: "center"
+                            color: rgba("#1B1B1B")
+                            size_hint_y: None
+                            height: dp(50)
+
+                        MDLabel:
+                            id: email_label
+                            text: "Email: Unknown"
+                            halign: "center"
+                            color: rgba("#1B1B1B")
+                            size_hint_y: None
+                            height: dp(50)
+
+                # ============================
+                #   LANGUAGE SETTINGS CARD
+                # ============================
+                MDCard:
+                    size_hint_y: None
+                    height: dp(320)
+                    radius: [25, 25, 25, 25]
+                    md_bg_color: rgba("#FFFFFF")
+                    elevation: 8
+                    padding: dp(20)
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: dp(14)
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDLabel:
+                            text: "Preferred Language"
+                            halign: "center"
+                            color: rgba("#4CAF50")
+                            size_hint_y: None
+                            height: dp(55)
+
+                        MDLabel:
+                            text: "Select your language:"
+                            halign: "center"
+                            color: rgba("#1B1B1B")
+                            size_hint_y: None
+                            height: dp(50)
+
+                        Spinner:
+                            id: lang_spinner
+                            text: "English"
+                            values: ["English", "Swahili", "Kamba", "Kikuyu", "Kalenjin", "Luhya", "Luo", "Meru"]
+                            size_hint_y: None
+                            height: dp(55)
+                            background_color: rgba("#F5F5F5")
+                            color: rgba("#1B1B1B")
+
+                        MDButton:
+                            text: "Save Language"
+                            md_bg_color: rgba("#4CAF50")
+                            color: (1, 1, 1, 1)
+                            size_hint_y: None
+                            height: dp(50)
+                            on_release: root.save_language()
+
+                # ============================
+                #   ABOUT CARD
+                # ============================
+                MDCard:
+                    size_hint_y: None
+                    height: dp(220)
+                    radius: [25, 25, 25, 25]
+                    md_bg_color: rgba("#FFFFFF")
+                    elevation: 8
+                    padding: dp(20)
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: dp(12)
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDLabel:
+                            text: "About"
+                            halign: "center"
+                            color: rgba("#4CAF50")
+                            size_hint_y: None
+                            height: dp(55)
+
+                        MDLabel:
+                            text: "Manage your account settings and preferences for the Coffee Leaf Disease Detector app."
+                            halign: "center"
+                            color: rgba("#1B1B1B")
+                            size_hint_y: None
+                            height: dp(100)
+
+        Widget:
+            size_hint_y: 0.1

@@ -1,0 +1,215 @@
+#:import dp kivy.metrics.dp
+#:import rgba kivy.utils.get_color_from_hex
+#:kivy 2.0
+
+<DetectionScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 1
+
+        # ==================================================
+        # TOP BAR WITH BACK BUTTON
+        # ==================================================
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(50)
+            md_bg_color: rgba("#4CAF50")
+            padding: dp(8)
+            spacing: dp(8)
+
+            MDIconButton:
+                icon: "arrow-left"
+                icon_size: "28sp"
+                on_release: root.go_back()
+
+            MDLabel:
+                text: "Disease Detection"
+                halign: "left"
+                valign: "center"
+                color: rgba("#FFFFFF")
+                size_hint_y: None
+                height: dp(50)
+
+        # ==================================================
+        # MAIN CONTENT
+        # ==================================================
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(12)
+                spacing: dp(12)
+                size_hint_y: None
+                height: self.minimum_height
+                md_bg_color: rgba("#F5F5F5")
+
+                # ---------------- IMAGE PREVIEW ----------------
+                MDCard:
+                    radius: [20, 20, 20, 20]
+                    elevation: 2
+                    padding: dp(8)
+                    size_hint_y: None
+                    height: dp(270)
+                    md_bg_color: rgba("#FFFFFF")
+
+                    Image:
+                        id: image_preview
+                        source: ""
+                        allow_stretch: True
+                        keep_ratio: True
+
+                # ---------------- IMAGE ACTIONS ----------------
+                MDBoxLayout:
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: dp(50)
+
+                    MDButton:
+                        md_bg_color: rgba("#4CAF50")
+                        on_release: root.take_photo()
+                        size_hint_x: 0.5
+
+                        MDButtonText:
+                            text: "Take Photo"
+                            color: 1, 1, 1, 1
+
+                    MDButton:
+                        md_bg_color: rgba("#2196F3")
+                        on_release: root.choose_file()
+                        size_hint_x: 0.5
+
+                        MDButtonText:
+                            text: "Upload Image"
+                            color: 1, 1, 1, 1
+
+                # ---------------- DETECT BUTTON ----------------
+                MDButton:
+                    md_bg_color: rgba("#FF9800")
+                    size_hint_y: None
+                    height: dp(50)
+                    on_release: root.detect_disease()
+
+                    MDButtonText:
+                        text: "Detect Disease"
+                        color: 1, 1, 1, 1
+
+                # ---------------- RESULT TEXT ----------------
+                MDCard:
+                    radius: [20, 20, 20, 20]
+                    padding: dp(12)
+                    elevation: 2
+                    md_bg_color: rgba("#FFFFFF")
+                    size_hint_y: None
+                    height: dp(160)
+
+                    MDLabel:
+                        id: result_label
+                        text: "Upload a coffee leaf image to begin detection."
+                        halign: "left"
+                        valign: "top"
+                        text_size: self.parent.width - dp(24), None
+                        color: 0, 0, 0, 1
+                        size_hint_y: None
+                        height: dp(50)
+
+                # ---------------- CONFIDENCE ----------------
+                MDCard:
+                    id: confidence_card
+                    opacity: 0
+                    radius: [20, 20, 20, 20]
+                    padding: dp(12)
+                    elevation: 1
+                    size_hint_y: None
+                    height: dp(100)
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: dp(6)
+
+                        MDLabel:
+                            id: confidence_text
+                            text: "Confidence"
+                            halign: "center"
+                            size_hint_y: 0.3
+
+                        MDLinearProgressIndicator:
+                            id: confidence_bar
+                            value: 0
+                            max: 100
+                            size_hint_y: 0.7
+
+                # ---------------- ACTION BUTTONS ----------------
+                MDBoxLayout:
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: dp(48)
+
+                    MDButton:
+                        id: analysis_button
+                        disabled: True
+                        on_release: root.show_advanced_analysis()
+
+                        MDButtonText:
+                            text: "Advanced Analysis"
+
+                    MDButton:
+                        id: export_button
+                        disabled: True
+                        on_release: root.export_report()
+
+                        MDButtonText:
+                            text: "Export Report"
+
+                # ---------------- TRANSLATE ----------------
+                MDButton:
+                    id: translate_button
+                    disabled: True
+                    on_release: root.translate_current()
+
+                    MDButtonText:
+                        text: "Translate Remedies"
+
+                # ---------------- CHAT ----------------
+                MDCard:
+                    id: chat_card
+                    opacity: 0
+                    radius: [20, 20, 20, 20]
+                    padding: dp(12)
+                    elevation: 1
+                    size_hint_y: None
+                    height: dp(250)
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: dp(8)
+
+                        ScrollView:
+                            size_hint_y: None
+                            height: dp(150)
+
+                            MDBoxLayout:
+                                id: chat_container
+                                orientation: "vertical"
+                                size_hint_y: None
+                                height: self.minimum_height
+                                spacing: dp(4)
+
+                        MDBoxLayout:
+                            id: chat_input_container
+                            spacing: dp(6)
+                            size_hint_y: None
+                            height: dp(50)
+
+                            MDTextField:
+                                id: chat_input
+                                hint_text: "Ask about the disease..."
+                                multiline: False
+
+                            MDButton:
+                                id: send_button
+                                disabled: True
+                                on_release: root.send_question()
+                                size_hint_x: 0.2
+
+                                MDButtonText:
+                                    text: "Send"
